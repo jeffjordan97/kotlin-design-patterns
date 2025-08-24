@@ -1,4 +1,4 @@
-package personal.learning.designpatterns.behavioural.strategy
+package patterns.behavioural.strategy
 
 /**
  * Demo showing how easy it is to switch strategies
@@ -43,6 +43,41 @@ fun main() {
 
     println("\nRouting requests (should pick least busy):")
     repeat(3) { i ->
+        println(loadBalancer.routeRequest("Request-${i + 1}"))
+    }
+
+    println("\n=== SWITCHING TO WEIGHTED RESPONSE TIME STRATEGY ===")
+    loadBalancer.changeStrategy(WeightedResponseTimeStrategy()) // Switch again!
+    loadBalancer.resetCounters()
+    loadBalancer.resetAverageResponseTimes()
+
+    // Make some servers busier
+    servers[0].activeRequests = 5
+    servers[1].activeRequests = 2
+    servers[2].activeRequests = 0
+    // Make some servers slower
+    servers[0].averageResponseTimeMs = 100.0
+    servers[1].averageResponseTimeMs = 200.0
+    servers[2].averageResponseTimeMs = 500.0
+    println("Current server load:")
+    println(loadBalancer.getServerWeightedResponseTime())
+
+    println("\nRouting requests (should pick lowest weighted response time):")
+    repeat(3) { i ->
+        println(loadBalancer.routeRequest("Request-${i + 1}"))
+    }
+
+    println("\n=== SWITCHING TO WEIGHTED ROUND ROBIN ===")
+    loadBalancer.changeStrategy(WeightedRoundRobinStrategy()) // Switch again!
+
+    servers[0].processingPower = 1.6
+    servers[1].processingPower = 2.5
+    servers[2].processingPower = 4.0
+    println("Current server load:")
+    println(loadBalancer.getServerProcessingPower())
+
+    println("\nRouting requests (should pick weighted round robin):")
+    repeat(6) { i ->
         println(loadBalancer.routeRequest("Request-${i + 1}"))
     }
 }

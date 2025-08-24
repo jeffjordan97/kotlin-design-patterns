@@ -1,4 +1,4 @@
-package personal.learning.designpatterns.behavioural.strategy
+package patterns.behavioural.strategy
 
 /**
  * Strategy Pattern - The Strategy Interface
@@ -16,5 +16,7 @@ interface LoadBalancingStrategy {
 data class Server(
     val name: String,
     val url: String,
-    var activeRequests: Int = 0
+    var activeRequests: Int = 0,
+    var averageResponseTimeMs: Double = 0.0,
+    var processingPower: Double = 0.0
 )

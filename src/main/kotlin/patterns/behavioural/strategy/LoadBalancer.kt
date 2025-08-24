@@ -1,4 +1,4 @@
-package personal.learning.designpatterns.behavioural.strategy
+package patterns.behavioural.strategy
 
 /**
  * LoadBalancer - The Context Class
@@ -47,9 +47,35 @@ class LoadBalancer(
     }
 
     /**
+     * Get current server weighted response times
+     */
+    fun getServerWeightedResponseTime(): String {
+        return servers.joinToString("\n") {
+            "${it.name}: ${it.activeRequests} active requests, ${it.averageResponseTimeMs * it.activeRequests} weighted response time"
+        }
+    }
+
+    /**
+     * Get current server processing power
+     */
+    fun getServerProcessingPower(): String {
+        return servers.joinToString("\n") {
+            "${it.name}: ${it.processingPower}GHz processing power"
+        }
+    }
+
+    /**
      * Reset request counters
      */
     fun resetCounters() {
         servers.forEach { it.activeRequests = 0 }
     }
+
+    /**
+     * Reset request average response times
+     */
+    fun resetAverageResponseTimes() {
+        servers.forEach { it.averageResponseTimeMs = 0.0 }
+    }
+
 }
