@@ -1,7 +1,5 @@
 package personal.learning.designpatterns.behavioural.strategy
 
-import kotlin.random.Random
-
 /**
  * Strategy 1: Round Robin - Take turns picking servers
  */
