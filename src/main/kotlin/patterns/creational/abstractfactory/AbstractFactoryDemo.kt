@@ -52,7 +52,7 @@ fun main() {
         service.handleRequest("req-001", "sample data")
         service.getRequest("req-001")
 
-        println("=" * 50 + "\n")
+//        println("=" * 50 + "\n")
     }
 
     println("=== SWITCHING ENVIRONMENTS AT RUNTIME ===\n")
