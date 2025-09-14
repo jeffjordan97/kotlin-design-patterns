@@ -1,4 +1,4 @@
-package personal.learning.kotlin.patterns.creational.factory
+package personal.learning.kotlin.patterns.creational.factory.httpclient
 
 import kotlin.random.Random
 
